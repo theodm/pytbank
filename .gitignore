@@ -1,0 +1,10 @@
+.idea
+__pycache__/
+calc/__pycache__/
+fin/__pycache__/
+fin/main.db
+fin/test/
+main.db
+util/__pycache__/
+
+
