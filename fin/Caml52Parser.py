@@ -39,11 +39,20 @@ def parseCaml52(input_xml: Union[str, TextIO]):
         unique_id = str(entry.AcctSvcrRef)
         credit = str(entry.CdtDbtInd.string)
 
+        creditor = "<unknown>"
+        creditor_iban = "<unknown>"
+        debitor = "<unknown>"
+        debitor_iban = "<unknown>"
+
         pties = entry.NtryDtls.TxDtls.RltdPties
-        creditor = str(pties.Cdtr.Nm.string)
-        creditor_iban = str(pties.CdtrAcct.Id.IBAN.string)
-        debitor = str(pties.Dbtr.Nm.string)
-        debitor_iban = str(pties.DbtrAcct.Id.IBAN.string)
+        if pties is not None:
+            if pties.Cdtr is not None:
+                creditor = str(pties.Cdtr.Nm.string)
+                creditor_iban = str(pties.CdtrAcct.Id.IBAN.string)
+
+            if pties.Dbtr is not None:
+                debitor = str(pties.Dbtr.Nm.string)
+                debitor_iban = str(pties.DbtrAcct.Id.IBAN.string)
 
         reasons = []
         for r in entry.NtryDtls.RmtInf.find_all("Ustrd"):

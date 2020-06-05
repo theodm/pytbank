@@ -8,3 +8,4 @@ main.db
 util/__pycache__/
 
 
+./start.sh
