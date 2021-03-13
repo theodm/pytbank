@@ -29,7 +29,6 @@ dispatcher = updater.dispatcher
 def create_fints_client():
     return FinTSClient(db, sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
 
-@run_async
 def search_new_transactions(context: CallbackContext):
     print("Suche nach neuen Transaktionen...")
 
@@ -84,7 +83,11 @@ def search_new_transactions(context: CallbackContext):
             chat_id=user_id, text=message, parse_mode=ParseMode.MARKDOWN
         )
 
+search_new_transactions(None)
 
-updater.job_queue.run_repeating(search_new_transactions, interval=60 * 60, first=0)
 
-updater.start_polling()
+
+#
+# updater.job_queue.run_repeating(search_new_transactions, interval=5, first=0)
+#
+# updater.start_polling()
